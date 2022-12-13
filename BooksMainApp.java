@@ -38,6 +38,7 @@ public class BooksMainApp {
 		 */
 		
 		Thread.sleep(3000);
+		System.out.println("Testing GIT");
 		driver.quit();
 	}
 
