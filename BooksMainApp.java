@@ -15,7 +15,6 @@ public class BooksMainApp {
 		System.setProperty("windows.chrome.driver", "C://WebDrivers//chromedriver.exe");
 
 		WebDriver driver = new ChromeDriver();
-		int i =0;
 		
 		FileInputStream fis = new FileInputStream("C:\\Eclipse\\PageObjectModel\\Test-Data.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
