@@ -1,17 +1,30 @@
 package pom.pages;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BooksMainApp {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		System.setProperty("windows.chrome.driver", "C://WebDrivers//chromedriver.exe");
 
 		WebDriver driver = new ChromeDriver();
-
+		
+		
+		FileInputStream fis = new FileInputStream("C:\\Eclipse\\PageObjectModel\\Test-Data.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+		XSSFSheet sheet = workbook.getSheet("LoginData");
+		XSSFRow row = sheet.getRow(1);
+		
+		
 		String URL = "https://demoqa.com/books";
-		driver.get(URL);
+		driver.get(row.getCell(1).getStringCellValue());
 		
 		driver.manage().window().maximize();
 		
@@ -24,8 +37,8 @@ public class BooksMainApp {
 		LoginPage login = new LoginPage(driver);
 		//login.clickNewUser();
 		
-		login.setUserName("Padmini");
-		login.setPassword("Selenium*123");
+		login.setUserName(row.getCell(2).getStringCellValue());
+		login.setPassword(row.getCell(3).getStringCellValue());
 		login.clickLogin();
 		
 		Thread.sleep(3000);
